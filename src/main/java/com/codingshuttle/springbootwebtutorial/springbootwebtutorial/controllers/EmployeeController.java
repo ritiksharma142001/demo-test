@@ -2,7 +2,7 @@ package com.codingshuttle.springbootwebtutorial.springbootwebtutorial.controller
 
 import com.codingshuttle.springbootwebtutorial.springbootwebtutorial.dto.EmployeeDTO;
 import com.codingshuttle.springbootwebtutorial.springbootwebtutorial.entities.EmployeeEntity;
-import com.codingshuttle.springbootwebtutorial.springbootwebtutorial.repositories.EmployeeRepository;
+import com.codingshuttle.springbootwebtutorial.springbootwebtutorial.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -17,26 +17,27 @@ public class EmployeeController {
 //        return "Secret message: asdfal@#$DASD";
 //    }
 
-    private final EmployeeRepository employeeRepository;
 
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    private final EmployeeService employeeService;
+
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping(path = "/{employeeId}")
-    public EmployeeEntity getEmployeeById(@PathVariable(name = "employeeId") Long id) {
-        return employeeRepository.findById(id).orElse(null);
+    public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long id) {
+        return employeeService.getEmployeeById(id);
     }
 
     @GetMapping
-    public List<EmployeeEntity> getAllEmployees(@RequestParam(required = false, name = "inputAge") Integer age,
+    public List<EmployeeDTO> getAllEmployees(@RequestParam(required = false, name = "inputAge") Integer age,
                                                 @RequestParam(required = false) String sortBy) {
-        return employeeRepository.findAll();
+        return employeeService.getAllEmployees();
     }
 
     @PostMapping
-    public EmployeeEntity createNewEmployee(@RequestBody EmployeeEntity inputEmployee) {
-        return employeeRepository.save(inputEmployee);
+    public EmployeeDTO createNewEmployee(@RequestBody EmployeeDTO inputEmployee) {
+        return employeeService.createNewEmployee(inputEmployee);
     }
 
     @PutMapping String updateEmployeeById() {
