@@ -8,6 +8,7 @@ class IntroductionToSpringBootApplicationTests {
 
 	@Test
 	void contextLoads() {
+		System.out.println("Anuj is running test");
 	}
 
 }
