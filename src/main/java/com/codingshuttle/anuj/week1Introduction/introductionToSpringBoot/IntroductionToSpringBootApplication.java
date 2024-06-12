@@ -8,11 +8,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class IntroductionToSpringBootApplication implements CommandLineRunner {
 
-	@Autowired
-	Apple apple1;
+//	@Autowired
+//	Apple apple1;
+//
+//	@Autowired
+//	Apple apple2;
 
 	@Autowired
-	Apple apple2;
+	DBService dbService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(IntroductionToSpringBootApplication.class, args);
@@ -21,10 +24,13 @@ public class IntroductionToSpringBootApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		apple1.eatApple();
-		apple2.eatApple();
 
-		System.out.println(apple1.hashCode());
-		System.out.println(apple2.hashCode());
+		System.out.println(dbService.getData());
+
+//		apple1.eatApple();
+//		apple2.eatApple();
+//
+//		System.out.println(apple1.hashCode());
+//		System.out.println(apple2.hashCode());
 	}
 }
