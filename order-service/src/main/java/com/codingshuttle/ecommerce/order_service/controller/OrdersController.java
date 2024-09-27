@@ -1,12 +1,14 @@
 package com.codingshuttle.ecommerce.order_service.controller;
 
 import com.codingshuttle.ecommerce.order_service.clients.InventoryOpenFeignClient;
+import com.codingshuttle.ecommerce.order_service.config.FeaturesEnableConfig;
 import com.codingshuttle.ecommerce.order_service.dto.OrderRequestDto;
 import com.codingshuttle.ecommerce.order_service.service.OrdersService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,7 @@ import java.util.List;
 @RequestMapping("/core")
 @RequiredArgsConstructor
 @Slf4j
+@RefreshScope
 public class OrdersController {
 
     private final OrdersService orderService;
@@ -23,9 +26,16 @@ public class OrdersController {
     @Value("${my.variable}")
     private String myVariable;
 
+    private final FeaturesEnableConfig featuresEnableConfig;
+
     @GetMapping("/helloOrders")
     public String helloOrders() {
-        return "Hello from Orders Service, my variable is: "+ myVariable;
+
+        if (featuresEnableConfig.isUserTrackingEnabled()) {
+            return "User tracking enabled wohoo, my variable is: "+ myVariable;
+        } else {
+           return "User tracking disabled awww, my variable is: "+ myVariable;
+        }
     }
 
     @PostMapping("/create-order")
