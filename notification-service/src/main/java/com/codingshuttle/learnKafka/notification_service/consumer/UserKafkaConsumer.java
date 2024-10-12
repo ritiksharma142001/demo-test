@@ -1,6 +1,6 @@
 package com.codingshuttle.learnKafka.notification_service.consumer;
 
-import com.codingshuttle.learnKafka.user_service.event.UserCreatedEvent;
+import com.codingshuttle.learnKafka.event.UserCreatedEvent;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
