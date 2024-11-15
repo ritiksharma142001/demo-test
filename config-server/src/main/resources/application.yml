@@ -6,7 +6,7 @@ spring:
         git:
           uri: https://github.com/Anuj-Kumar-Sharma/ecommerce-config-server
           username: anuj-kumar-sharma
-          password: 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
+          password: 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
           default-label: master
 server:
   port: 8888
