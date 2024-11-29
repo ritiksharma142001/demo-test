@@ -1,22 +1,37 @@
 package com.codingshuttle.anuj55149.LearnAsyncScheduling;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
+import java.time.Instant;
 import java.util.concurrent.*;
 
 @SpringBootApplication
 @Slf4j
+@EnableScheduling
 public class LearnAsyncSchedulingApplication implements CommandLineRunner {
+
+    @Autowired
+    private TaskScheduler taskScheduler;
 
     public static void main(String[] args) {
         SpringApplication.run(LearnAsyncSchedulingApplication.class, args);
+
     }
 
     @Override
     public void run(String... args) throws Exception {
+
+//        taskScheduler.schedule(() -> {
+//            log.info("Running after 2 sec");
+//        }, Instant.ofEpochSecond(2));
 
         ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(4,
                 6, 2, TimeUnit.SECONDS,
@@ -44,18 +59,18 @@ public class LearnAsyncSchedulingApplication implements CommandLineRunner {
             }
         });
 
-        scheduledThreadPoolExecutor
-                .schedule(new LongRunningTask("schedule task"),
-                        4, TimeUnit.SECONDS);
+//        scheduledThreadPoolExecutor
+//                .schedule(new LongRunningTask("schedule task"),
+//                        4, TimeUnit.SECONDS);
 
-        log.info("Starting main Thread -> {}", Thread.currentThread().getName());
+//        log.info("Starting main Thread -> {}", Thread.currentThread().getName());
 
         for (int i = 0; i<20; i++) {
 //            threadPoolExecutor.submit(new LongRunningTask(i+""));
 //            Thread.sleep(1000);
         }
 
-        log.info("Ending main Thread -> {}", Thread.currentThread().getName());
+//        log.info("Ending main Thread -> {}", Thread.currentThread().getName());
 
     }
 }
