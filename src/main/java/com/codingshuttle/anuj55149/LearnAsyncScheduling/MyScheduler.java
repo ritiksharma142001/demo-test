@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MyScheduler {
 
-    @Scheduled(fixedRate = 200) // NOT concurrent
+//    @Scheduled(fixedRate = 200) // NOT concurrent
     @Async()
     void logMe() {
         log.info("Scheduler1 started... {}", Thread.currentThread().getName());
