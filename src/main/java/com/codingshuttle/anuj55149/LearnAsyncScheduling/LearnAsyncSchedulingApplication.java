@@ -16,6 +16,7 @@ import java.util.concurrent.*;
 @SpringBootApplication
 @Slf4j
 @EnableScheduling
+@EnableAsync
 public class LearnAsyncSchedulingApplication implements CommandLineRunner {
 
     @Autowired

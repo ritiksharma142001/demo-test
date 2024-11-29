@@ -4,7 +4,12 @@ package com.codingshuttle.anuj55149.LearnAsyncScheduling;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.TaskScheduler;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+
+import java.util.concurrent.Executor;
+import java.util.concurrent.RejectedExecutionHandler;
+import java.util.concurrent.ThreadPoolExecutor;
 
 @Configuration
 public class ThreadConfig {
@@ -16,5 +21,22 @@ public class ThreadConfig {
         taskScheduler.setThreadNamePrefix("CustomTask-");
         taskScheduler.initialize();
         return taskScheduler;
+    }
+
+    @Bean
+    public Executor jobExecutor() {
+        ThreadPoolTaskExecutor taskExecutor = new ThreadPoolTaskExecutor();
+        taskExecutor.setCorePoolSize(4);
+        taskExecutor.setMaxPoolSize(10);
+        taskExecutor.setQueueCapacity(6);
+        taskExecutor.setThreadNamePrefix("AnujExec-");
+        taskExecutor.setRejectedExecutionHandler(new RejectedExecutionHandler() {
+            @Override
+            public void rejectedExecution(Runnable r, ThreadPoolExecutor executor) {
+
+            }
+        });
+        taskExecutor.initialize();
+        return taskExecutor;
     }
 }

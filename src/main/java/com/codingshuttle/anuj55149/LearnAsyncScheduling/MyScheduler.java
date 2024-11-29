@@ -1,6 +1,7 @@
 package com.codingshuttle.anuj55149.LearnAsyncScheduling;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -8,7 +9,8 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class MyScheduler {
 
-    @Scheduled(cron = "*/5 * * * * *") // NOT concurrent
+    @Scheduled(fixedRate = 200) // NOT concurrent
+    @Async()
     void logMe() {
         log.info("Scheduler1 started... {}", Thread.currentThread().getName());
         try {
