@@ -1,1 +1,2 @@
 Line 1: Original content
+Line 3: Completed feature B
