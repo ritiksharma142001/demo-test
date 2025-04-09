@@ -1,2 +1,6 @@
 Line 1: Original content
+<<<<<<< Updated upstream
 Line 3: Completed feature B
+=======
+Line 2: Unfinished feature A
+>>>>>>> Stashed changes
